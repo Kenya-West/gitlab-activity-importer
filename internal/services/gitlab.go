@@ -118,7 +118,7 @@ func GetProjectCommits(projectId int, gitlabUserName string) ([]internal.Commit,
 	client := &http.Client{Timeout: 30 * time.Second}
 	for page := 1; ; {
 		req, err := http.NewRequestWithContext(context.Background(), "GET",
-			fmt.Sprintf("%s/api/v4/projects/%d/repository/commits?author=%s&per_page=100&page=%d",
+			fmt.Sprintf("%s/api/v4/projects/%d/repository/commits?all=true&author=%s&per_page=100&page=%d",
 				base, projectId, url.QueryEscape(gitlabUserName), page), nil)
 		if err != nil {
 			return nil, fmt.Errorf("error fetching the commits: %w", err)
